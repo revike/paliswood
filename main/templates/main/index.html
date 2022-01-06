@@ -1,0 +1,80 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block menu %}
+    <div class="header">
+        <div class="row">
+            <div class="col-9">
+                <a href="#">
+                    <img class="label" src="{% static 'img/label.png' %}"
+                         alt="">
+                </a>
+            </div>
+            <div class="col-1 social">
+                <a href="#">
+                    <img src="{% static 'img/phone.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-1 social">
+                <a href="#">
+                    <img src="{% static 'img/vkontakte.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-1 social">
+                <a href="#">
+                    <img src="{% static 'img/telegram.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-1 social">
+                <a href="#">
+                    <img src="{% static 'img/youtube.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-1 social">
+                <a href="#">
+                    <img src="{% static 'img/whatsapp.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-1 social">
+                <a href="#">
+                    <img src="{% static 'img/email.png' %}" alt="">
+                </a>
+            </div>
+            <div class="row">
+                <div class="col-11"></div>
+                <div class="col-1 social">
+                    <a href="#">
+                        <img src="{% static 'img/profile.png' %}" alt="">
+                    </a>
+                </div>
+                <div class="col-1 social">
+                    <a href="#">
+                        <img src="{% static 'img/basket.png' %}" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ul class="topmenu">
+        <li class=""><a class="text-center active" href="">Главная</a></li>
+        <li><a class="text-center" href="">Каталог</a>
+{#            <ul class="submenu">#}
+{#                <li><a href="">Category</a></li>#}
+{#                <li><a href="">Author</a></li>#}
+{#                <li><a href="">Archive</a></li>#}
+{#                <li><a href="">Tags</a></li>#}
+{#            </ul>#}
+        </li>
+        <li><a class="text-center" href="">Покупателям</a>
+{#            <ul class="submenu">#}
+{#                <li><a href="">Category</a></li>#}
+{#                <li><a href="">Author</a></li>#}
+{#                <li><a href="">Archive</a></li>#}
+{#                <li><a href="">Tags</a></li>#}
+{#            </ul>#}
+        </li>
+        <li><a class="text-center" href="">О нас</a></li>
+    </ul>
+
+{% endblock %}
