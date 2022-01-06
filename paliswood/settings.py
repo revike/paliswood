@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import json
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -19,13 +20,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8lkp1ep61r)utpc2^0els&b4by-z7++p+of4)z03l*usv^&$@t'
+with open(BASE_DIR / 'paliswood/env.json', 'r') as f:
+    ENV = json.load(f)
+    SECRET_KEY = ENV['SECRET_KEY']
+    DEBUG_MODE = ENV['DEBUG_MODE']
+    ALLOWED_HOSTS = ENV['ALLOWED_HOSTS']
+    POSTGRE_DB = ENV['POSTGRE_DB']
+    POSTGRE_USER = ENV['POSTGRE_USER']
+    POSTGRE_PASSWORD = ENV['POSTGRE_PASSWORD']
+    EMAIL_PASSWORD = ENV['EMAIL_PASSWORD']
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+if DEBUG_MODE == "True":
+    DEBUG = True
+else:
+    DEBUG = False
 
 
 # Application definition
@@ -73,13 +83,23 @@ WSGI_APPLICATION = 'paliswood.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if POSTGRE_PASSWORD != "":
+    DATABASES = {
+        'default': {
+            'NAME': POSTGRE_DB,
+            'ENGINE': 'django.db.backends.postgresql',
+            'USER': POSTGRE_USER,
+            'PASSWORD': POSTGRE_PASSWORD,
+            'HOST': 'localhost'
+        }
     }
-}
-
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -99,13 +119,28 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# CACHE_MIDDLEWARE_ALIAS = 'default'
+# CACHE_MIDDLEWARE_SECONDS = 120
+# CACHE_MIDDLEWARE_KEY_PREFIX = 'paliswood'
+#
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'LOCATION': '127.0.0.1:11211'
+#     }
+# }
+#
+# LOW_CACHE = False
+
+# AUTH_USER_MODEL = 'authapp.ShopUser'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -115,7 +150,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'
+# STATICFILES_DIRS = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
