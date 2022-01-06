@@ -1,0 +1,65 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block menu %}
+    <div class="header">
+        <div class="row">
+            <div class="col-9">
+                <a href="#">
+                    <img class="label" src="{% static 'img/label.png' %}"
+                         alt="">
+                </a>
+            </div>
+            <div class="col-1 social">
+                <a href="#">
+                    <img src="{% static 'img/phone.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-1 social">
+                <a href="#">
+                    <img src="{% static 'img/vkontakte.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-1 social">
+                <a href="#">
+                    <img src="{% static 'img/telegram.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-1 social">
+                <a href="#">
+                    <img src="{% static 'img/youtube.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-1 social">
+                <a href="#">
+                    <img src="{% static 'img/whatsapp.png' %}" alt="">
+                </a>
+            </div>
+            <div class="col-1 social">
+                <a href="#">
+                    <img src="{% static 'img/email.png' %}" alt="">
+                </a>
+            </div>
+            <div class="row">
+                <div class="col-11"></div>
+                <div class="col-1 social">
+                    <a href="#">
+                        <img src="{% static 'img/profile.png' %}" alt="">
+                    </a>
+                </div>
+                <div class="col-1 social">
+                    <a href="#">
+                        <img src="{% static 'img/basket.png' %}" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <h5 class="col-12 center">
+            Меню
+        </h5>
+    </div>
+
+{% endblock %}

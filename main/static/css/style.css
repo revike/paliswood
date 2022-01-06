@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.header {
+    background: url(../img/header.jpg);
+}
+
+.label {
+    width: 25%;
+}
+
+.social {
+    width: 4%;
+    margin-top: 3%;
+}
+
+.menu {
+    background: #191c1f;
+}
