@@ -6,9 +6,10 @@ class ProductCategory(models.Model):
 
     class Meta:
         verbose_name_plural = 'категории'
+        verbose_name = 'категории'
 
     name = models.CharField(max_length=64, unique=True, verbose_name='имя')
-    description = models.TextField(verbose_name='описание')
+    description = models.TextField(blank=True, verbose_name='описание')
     is_active = models.BooleanField(default=True, verbose_name='активна',
                                     db_index=True)
 
@@ -25,6 +26,7 @@ class Product(models.Model):
 
     class Meta:
         verbose_name_plural = 'продукты'
+        verbose_name = 'продукты'
 
     category = models.ForeignKey(
         to=ProductCategory, on_delete=models.CASCADE, verbose_name='категория',
@@ -61,6 +63,7 @@ class Social(models.Model):
 
     class Meta:
         verbose_name_plural = 'иконки социальных сетей'
+        verbose_name = 'иконки социальных сетей'
 
     phone = models.CharField(max_length=20, blank=True, verbose_name='телефон')
     vk = models.CharField(max_length=128, blank=True, verbose_name='vk_com')

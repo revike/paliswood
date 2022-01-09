@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup',
     'main',
+    'auth_app',
 
     'debug_toolbar',
     'template_profiler_panel',
@@ -145,8 +146,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# AUTH_USER_MODEL = 'auth.ShopUser'
-
+AUTH_USER_MODEL = 'auth_app.ShopUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

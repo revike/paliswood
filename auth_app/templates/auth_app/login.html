@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="content" id="content">
+        <h1 class="text-center">{{ title|title }}</h1>
+
+        <div class="row">
+            <div class="col-5"></div>
+            -
+            <div class="col-2">
+                <form action="{% url 'auth_app:login' %}"
+                      method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input class="button btn-success" type="submit"
+                           value="Войти">
+                    <a class="btn btn text-decoration-underline text-success"
+                       href="{% url 'auth_app:register' %}">Зарегистрироваться</a>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

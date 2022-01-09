@@ -23,6 +23,7 @@ from main.views import Error404
 urlpatterns = [
     path('adminpaliswood/', admin.site.urls),
     path('', include('main.urls', namespace='main')),
+    path('', include('auth_app.urls', namespace='auth_app')),
 ]
 
 admin.site.site_header = "PalisWood Administrator"
