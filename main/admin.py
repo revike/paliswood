@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from main.models import ProductCategory, Product, ImageProduct
+from main.models import ProductCategory, Product, ImageProduct, Social
 
 
 class InlineImage(admin.TabularInline):
@@ -14,3 +14,4 @@ class ProductAdmin(admin.ModelAdmin):
 
 admin.site.register(ProductCategory)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Social)
