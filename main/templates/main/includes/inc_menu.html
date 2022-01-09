@@ -1,0 +1,33 @@
+<ul class="topmenu">
+    <li class="text-center">
+        <a
+                {% if request.resolver_match.route == '' %}class="active"{% endif %}
+                href="{% url 'main:index' %}">Главная
+        </a>
+    </li>
+    <li class="text-center">
+        <a
+                {% if request.resolver_match.route == 'catalog/' %}class="active"{% endif %}
+                href="{% url 'main:catalog' %}">Каталог
+        </a>
+        <ul class="submenu">
+            {% for category in categories %}
+                <li>
+                    <a href="{% url 'main:category' pk=category.id %}">{{ category.name|title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li class="text-center">
+        <a
+                {% if request.resolver_match.route == 'buyers/' %}class="active"{% endif %}
+                href="{% url 'main:buyers' %}">Покупателям
+        </a>
+    </li>
+    <li class="text-center">
+        <a
+                {% if request.resolver_match.route == 'about/' %}class="active"{% endif %}
+                href="{% url 'main:about' %}">О нас
+        </a>
+    </li>
+</ul>

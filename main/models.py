@@ -15,6 +15,10 @@ class ProductCategory(models.Model):
     def __str__(self):
         return self.name
 
+    @staticmethod
+    def get_category():
+        return ProductCategory.objects.all().select_related()
+
 
 class Product(models.Model):
     """Model for products"""
@@ -50,3 +54,29 @@ class ImageProduct(models.Model):
                                 verbose_name='продукт')
     image = models.ImageField(
         upload_to='products_images', blank=True, verbose_name='картинка')
+
+
+class Social(models.Model):
+    """Model for Social"""
+
+    class Meta:
+        verbose_name_plural = 'иконки социальных сетей'
+
+    phone = models.CharField(max_length=20, blank=True, verbose_name='телефон')
+    vk = models.CharField(max_length=128, blank=True, verbose_name='vk_com')
+    telegram = models.CharField(max_length=128, blank=True,
+                                verbose_name='telegram (только логин, без @)')
+    youtube = models.CharField(max_length=128, blank=True,
+                               verbose_name='youtube')
+    whatsapp = models.CharField(blank=True,
+                                max_length=128,
+                                verbose_name='whatsapp (только номер телефона)')
+    email = models.EmailField(max_length=128, blank=True,
+                              verbose_name='E-Mail')
+
+    @staticmethod
+    def get_social():
+        return Social.objects.all().first()
+
+    def __str__(self):
+        return f'{self.id} иконки социальных сетей'

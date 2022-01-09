@@ -21,13 +21,24 @@
 </head>
 
 <body>
-        {% block menu %}
-        {% endblock %}
+{% block menu %}
+    <div id="header">
+        {% include 'main/includes/inc_header.html' %}
+        {% include 'main/includes/inc_menu.html' %}
+    </div>
+{% endblock %}
 
-        {% block content %}
-        {% endblock %}
+{% block content %}
+{% endblock %}
 
-        {% block footer %}
-        {% endblock %}
+{% block footer %}
+    <div class="footer" id="footer">
+        <div class="text-center">
+            © 2015-{% now "Y" %} PalisWood
+            <a class="text-black-50 btn" href="#">Политика
+                конфиденциальности</a>
+        </div>
+    </div>
+{% endblock %}
 </body>
 </html>

@@ -16,7 +16,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -30,13 +29,11 @@ with open(BASE_DIR / 'paliswood/env.json', 'r') as f:
     POSTGRE_PASSWORD = ENV['POSTGRE_PASSWORD']
     EMAIL_PASSWORD = ENV['EMAIL_PASSWORD']
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 if DEBUG_MODE == "True":
     DEBUG = True
 else:
     DEBUG = False
-
 
 # Application definition
 
@@ -49,6 +46,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup',
     'main',
+
+    'debug_toolbar',
+    'template_profiler_panel',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +59,32 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+if DEBUG:
+    def show_toolbar(request):
+        return True
+
+    DEBUG_TOOLBAR_CONFIG = {
+        'SHOW_TOOLBAR_CALLBACK': show_toolbar,
+    }
+
+    DEBUG_TOOLBAR_PANELS = [
+        'debug_toolbar.panels.versions.VersionsPanel',
+        'debug_toolbar.panels.timer.TimerPanel',
+        'debug_toolbar.panels.settings.SettingsPanel',
+        'debug_toolbar.panels.headers.HeadersPanel',
+        'debug_toolbar.panels.request.RequestPanel',
+        'debug_toolbar.panels.sql.SQLPanel',
+        'debug_toolbar.panels.templates.TemplatesPanel',
+        'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+        'debug_toolbar.panels.cache.CachePanel',
+        'debug_toolbar.panels.signals.SignalsPanel',
+        'debug_toolbar.panels.logging.LoggingPanel',
+        'debug_toolbar.panels.redirects.RedirectsPanel',
+        'debug_toolbar.panels.profiling.ProfilingPanel',
+    ]
 
 ROOT_URLCONF = 'paliswood.urls'
 
@@ -80,7 +105,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'paliswood.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -121,20 +145,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# CACHE_MIDDLEWARE_ALIAS = 'default'
-# CACHE_MIDDLEWARE_SECONDS = 120
-# CACHE_MIDDLEWARE_KEY_PREFIX = 'paliswood'
-#
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-#         'LOCATION': '127.0.0.1:11211'
-#     }
-# }
-#
-# LOW_CACHE = False
-
-# AUTH_USER_MODEL = 'authapp.ShopUser'
+# AUTH_USER_MODEL = 'auth.ShopUser'
 
 
 # Internationalization
@@ -147,7 +158,6 @@ TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
